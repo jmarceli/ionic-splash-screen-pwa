@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -11,12 +9,24 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+  constructor(platform: Platform) {
+    this.handleSplashScreen()
+  }
+
+  // hide #splash-screen when app is ready
+  async handleSplashScreen(): Promise<void> {
+    try {
+      // wait for App to finish loading
+      await this.platform.ready()
+    } catch (error) {
+      // TODO: there is probably nothing we can do about that...
+    }
+    // Here you may
+    
+    const splash = document.getElementById('splash-screen')
+    // start opacity animation
+    splash.style.opacity = '0'
+    // remove after it is hidden
+    setTimeout(() => { splash.remove() }, 300)
   }
 }
