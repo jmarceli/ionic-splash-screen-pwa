@@ -9,7 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any = TabsPage;
 
-  constructor(platform: Platform) {
+  constructor(public platform: Platform) {
     this.handleSplashScreen()
   }
 
